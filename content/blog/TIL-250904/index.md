@@ -23,3 +23,7 @@ TCPKeepAlive no
 ```
 
 나는 기존에 작성해둔 정보들이 있어서 ServerAliveInterval, TCPKeepAlive만 추가했고 내일 출근해서 제대로 동작되는지 확인해봐야겠다.
+
+**🤔 확인 결과**
+
+일단 터미널에서는 SSH 연결이 끊기지 않는 것 같은데 이번엔 `ERR_CONNECTION_REFUSED`가 뜨면서 접속이 되지 않는다.
