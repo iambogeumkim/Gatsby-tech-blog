@@ -42,10 +42,21 @@ category: "TIL"
 
         ```python
         response = client.models.generate_content(
-            model="gemini-2.5-flash-image",
-            contents=[prompt],
+            model="gemini-3-pro-image-preview",
+            contents=[
+                prompt,
+                Image.open('person1.png'),
+                Image.open('person2.png'),
+                Image.open('person3.png'),
+                Image.open('person4.png'),
+                Image.open('person5.png'),
+            ],
             config=types.GenerateContentConfig(
-                response_modalities=['Image']
+                response_modalities=['TEXT', 'IMAGE'],
+                image_config=types.ImageConfig(
+                    aspect_ratio=aspect_ratio,
+                    image_size=resolution
+                ),
             )
         )
         ```
