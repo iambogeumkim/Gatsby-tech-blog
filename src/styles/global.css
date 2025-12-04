@@ -770,21 +770,30 @@ body, .global-wrapper {
 }
 
 .preview-thumb-wrapper {
-  width: 38%;
-  min-width: 160px;
-  max-width: 320px;
+  width: 240px;
+  min-width: 240px;
+  max-width: 240px;
+  height: 160px;
   background: #f9efd4;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  border-radius: 12px;
+  flex-shrink: 0;
 }
 
 .preview-thumb {
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 0; /* wrapper에서 radius 처리하므로 여기선 제거하거나 맞춰줌 */
   display: block;
+  transition: transform 0.3s ease;
+}
+
+.preview-card:hover .preview-thumb {
+  transform: scale(1.05);
 }
 
 .preview-thumb--placeholder {
