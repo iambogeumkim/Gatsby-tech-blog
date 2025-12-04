@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "gatsby";
 import Layout from "../components/layout";
 import Bio from "../components/bio";
@@ -8,6 +8,7 @@ const CategoryPost = ({ data, location, pageContext }) => {
   const { category } = pageContext;
   const siteTitle = data.site.siteMetadata.title;
   const posts = data.allMarkdownRemark.nodes;
+  const [numPostsToShow, setNumPostsToShow] = useState(3);
 
   // 카테고리 목록, 메인에서 All Posts 포함
   const categories = ["All Posts", "Insight", "PS", "Paper"];
@@ -18,21 +19,17 @@ const CategoryPost = ({ data, location, pageContext }) => {
       <h1 className="blog-main-title">{category || "All posts"}</h1>
 
       <ol style={{ listStyle: "none" }}>
-        {posts.map(post => {
+        {posts.slice(0, numPostsToShow).map(post => {
           // 이미지, 타이틀, 설명 등
           const title = post.frontmatter.title || post.fields.slug;
           const description = post.frontmatter.description;
-          const thumbnail = post.frontmatter.thumbnail; // 이미지 path
+          const thumbnail = post.frontmatter.thumbnail || "/images/post_thumbnail.png"; // 이미지 path
           
           return (
             <li key={post.fields.slug}>
               <Link to={post.fields.slug} className="preview-card">
                 <div className="preview-thumb-wrapper">
-                  {thumbnail ? (
-                    <img src={thumbnail} alt={title} className="preview-thumb" />
-                  ) : (
-                    <div className="preview-thumb preview-thumb--placeholder"></div>
-                  )}
+                  <img src={thumbnail} alt={title} className="preview-thumb" />
                 </div>
                 <div className="preview-text">
                   <h2 className="preview-title">{title}</h2>
@@ -45,6 +42,11 @@ const CategoryPost = ({ data, location, pageContext }) => {
           );
         })}
       </ol>
+      {numPostsToShow < posts.length && (
+        <button className="load-more-btn" onClick={() => setNumPostsToShow(numPostsToShow + 3)}>
+          More
+        </button>
+      )}
     </Layout>
   );
 };
@@ -71,6 +73,7 @@ export const pageQuery = graphql`
           title
           date(formatString: "MMMM DD, YYYY")
           description
+          thumbnail
         }
       }
     }

@@ -46,7 +46,7 @@ const Layout = ({ location, title, children }) => {
           {/* 우측: 소셜 아이콘 및 다크모드 토글 */}
           <div className="search-header-socials">
             <a
-              href="https://github.com/nsbg"
+              href="https://github.com/iambogeumkim"
               target="_blank"
               rel="noopener noreferrer"
               className="social-link icon-square-btn"

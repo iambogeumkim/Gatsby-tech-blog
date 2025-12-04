@@ -72,8 +72,8 @@ const BlogIndex = ({ data, location }) => {
           })}
         </div>
         {numPostsToShow < posts.length && (
-          <button className="load-more-btn" onClick={() => setNumPostsToShow(posts.length)}>
-            더 보기
+          <button className="load-more-btn" onClick={() => setNumPostsToShow(numPostsToShow + 6)}>
+            More
           </button>
         )}
       </div>
