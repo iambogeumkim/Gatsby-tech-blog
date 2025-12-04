@@ -5,3 +5,5 @@ description: "1 day 1 lesson"
 category: "TIL"
 ---
 # 📟 Webhook
+## 개념
+WIP

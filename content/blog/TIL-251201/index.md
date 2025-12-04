@@ -5,7 +5,7 @@ description: "1 day 1 lesson"
 category: "TIL"
 ---
 # 🍌 Nano banana pro
-##  문제
+## 문제
 - Nano banana pro 모델을 이용해 이미지를 생성하던 중 retry 로직을 추가했음에도 api 호출 결과로 `None`이 반환되는 상황이 반복적으로 나타났다.
 - 구현해둔 retry 로직상 `None`이 반환되면 모델 호출 및 생성 과정이 다시 돌아가기 때문에 스테이징 서버 테스트 시 종종 timeout error가 뜨는 경우가 있었고, 이 상태로 운영 서버에 배포된다면 생성 결과에 일관성이 없어서 고객들에게 신뢰를 줄 수 없겠다는 생각이 들었다.
 
