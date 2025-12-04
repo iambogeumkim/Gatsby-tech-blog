@@ -343,6 +343,26 @@ span[itemProp="headline"]:hover {
   border-radius: 0.1em;
 }
 
+.load-more-btn {
+  display: block;
+  margin: 40px auto 0 auto;
+  padding: 12px 24px;
+  background: #2563FF;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 16px rgba(37,99,255,0.2);
+}
+
+.load-more-btn:hover {
+  background: #1748B7;
+  box-shadow: 0 6px 20px rgba(37,99,255,0.3);
+}
+
 /* Media queries */
 
 @media (max-width: 42rem) {

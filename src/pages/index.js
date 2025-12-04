@@ -7,6 +7,7 @@ import Seo from "../components/seo"
 
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
+  const [numPostsToShow, setNumPostsToShow] = React.useState(6)
   const posts = data.allMarkdownRemark.nodes
   const categories = data.allMarkdownRemark.categoryList
 
@@ -49,7 +50,7 @@ const BlogIndex = ({ data, location }) => {
 
         {/* 카드 그리드로 글 리스트 출력 */}
         <div className="blog-card-grid">
-          {posts.map(post => {
+          {posts.slice(0, numPostsToShow).map(post => {
             const title = post.frontmatter.title || post.fields.slug
             return (
               <Link to={post.fields.slug} key={post.fields.slug} className="blog-card">
@@ -70,6 +71,11 @@ const BlogIndex = ({ data, location }) => {
             )
           })}
         </div>
+        {numPostsToShow < posts.length && (
+          <button className="load-more-btn" onClick={() => setNumPostsToShow(posts.length)}>
+            더 보기
+          </button>
+        )}
       </div>
     </Layout>
   )
