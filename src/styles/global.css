@@ -311,10 +311,10 @@ body, .global-wrapper {
 
 .blog-card-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);   /* 3열 예시, 반응형이면 media query로 변경 */
-  gap: 45px;
+  grid-template-columns: repeat(3, 300px);
+  gap: 32px;
   justify-content: center;
-  align-items: stretch;
+  align-items: start;
 }
 
 .blog-card {
@@ -327,6 +327,7 @@ body, .global-wrapper {
   text-decoration: none;
   color: var(--text-primary);
   transition: box-shadow .14s, background .3s;
+  width: 300px;
   min-width: 300px;
   max-width: 300px;             
   min-height: 250px;
@@ -336,13 +337,14 @@ body, .global-wrapper {
 }
 
 .blog-card-grid, .category-posts-list {
-  width: 100%;              /* 부모(.blog-index-wrapper) 최대폭에 맞춤 */
-  max-width: 830px;         /* 헤더 검색바와 똑같이! */
+  width: 100%;
+  max-width: 996px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 필요시 조정 */
-  gap: 38px;
-  justify-items: center;    /* 아이템도 가운데 */
+  grid-template-columns: repeat(3, 300px);
+  gap: 32px;
+  justify-content: center;
+  justify-items: center;
 }
 .blog-card-thumb {
   width: 100%;
@@ -463,17 +465,18 @@ body.dark-mode .category-thought {
 
 /* 반응형: 모바일 레이아웃에서는 1~2칸 */
 @media (max-width: 1040px) {
-  .blog-card-grid { grid-template-columns: repeat(2, 1fr); }
+  .blog-card-grid, .category-posts-list { grid-template-columns: repeat(2, 300px); }
 }
 
 @media (max-width: 700px) {
   .blog-main-title {
     font-size: 2rem;
   }
-  .blog-card-grid { grid-template-columns: 1fr; }
+  .blog-card-grid, .category-posts-list { grid-template-columns: 1fr; }
   .blog-card {
-    min-width: 92vw;
-    max-width: 92vw;
+    width: 100%;
+    min-width: 280px;
+    max-width: 100%;
     min-height: 200px;
     max-height: 220px;
   }
@@ -548,11 +551,11 @@ body.dark-mode .category-thought {
 }
 
 .post-title {
-  font-size: 2.8rem;
+  font-size: 2rem;
   font-weight: 700;
   color: var(--text-accent);
   margin: 0 0 4px 0;
-  letter-spacing: -1.2px;
+  letter-spacing: -0.8px;
 }
 
 .post-meta {
@@ -606,7 +609,7 @@ body.dark-mode .category-thought {
     border-radius: 16px;
   }
   .post-title {
-    font-size: 2rem;
+    font-size: 1.7rem;
   }
 }
 
@@ -616,7 +619,7 @@ body.dark-mode .category-thought {
     font-size: 1rem;
   }
   .post-title {
-    font-size: 1.45rem;
+    font-size: 1.35rem;
   }
 }
 
@@ -971,7 +974,9 @@ body.dark-mode .header-title-link {
   color: var(--text-accent);
   margin-bottom: 14px;
   margin-top: 32px;
-  white-space: nowrap;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -979,7 +984,9 @@ body.dark-mode .header-title-link {
 .preview-desc {
   font-size: 1.07rem;
   color: var(--text-accent);
-  white-space: nowrap;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
 }

@@ -1,5 +1,5 @@
 ---
-title: "251204 TIL: 웹 지식이 필요한 이유"
+title: "251204 TIL: 웹 지식의 필요성"
 date: "2025-12-04T12:00:00.000+09:00"
 description: "1 day 1 lesson"
 category: "TIL"

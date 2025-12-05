@@ -28,6 +28,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             fields {
               slug
             }
+            frontmatter {
+              category
+            }
           }
       }
     }
@@ -49,8 +52,25 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   if (posts.length > 0) {
     posts.forEach((post, index) => {
-      const previousPostId = index === 0 ? null : posts[index - 1].id
-      const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id
+      const currentCategory = post.frontmatter.category
+
+      // 같은 카테고리의 이전 글 찾기
+      let previousPostId = null
+      for (let i = index - 1; i >= 0; i--) {
+        if (posts[i].frontmatter.category === currentCategory) {
+          previousPostId = posts[i].id
+          break
+        }
+      }
+
+      // 같은 카테고리의 다음 글 찾기
+      let nextPostId = null
+      for (let i = index + 1; i < posts.length; i++) {
+        if (posts[i].frontmatter.category === currentCategory) {
+          nextPostId = posts[i].id
+          break
+        }
+      }
 
       createPage({
         path: post.fields.slug,
