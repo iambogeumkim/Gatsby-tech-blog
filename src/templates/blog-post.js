@@ -3,6 +3,7 @@ import { Link, graphql } from "gatsby"
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import Giscus from "../components/Giscus"
 
 const BlogPostTemplate = ({
   data: { previous, next, site, markdownRemark: post },
@@ -60,6 +61,8 @@ const BlogPostTemplate = ({
                   </li>
                 </ul>
               </nav>
+              {/* 댓글 및 리액션 */}
+              <Giscus />
             </footer>
           </article>
         </div>

@@ -1047,3 +1047,14 @@ body.dark-mode .header-title-link {
     display: none;           /* 작은 화면에선 TOC 우측 고정 숨김 */
   }
 }
+
+/* Giscus 댓글 영역 */
+.giscus-wrapper {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border-color);
+}
+
+.giscus-wrapper .giscus {
+  max-width: 100%;
+}
