@@ -26,29 +26,29 @@
 }
 
 body.dark-mode {
-  --bg-primary: #121212;
-  --bg-header: #1a1a2e;
-  --bg-card: #1e1e2f;
-  --bg-card-hover: #2a2a40;
-  --bg-search-bar: #1a1a2e;
-  --bg-footer: #0a0a15;
+  --bg-primary: #0f172a;
+  --bg-header: #312e81;
+  --bg-card: #1e293b;
+  --bg-card-hover: #334155;
+  --bg-search-bar: #1e293b;
+  --bg-footer: #020617;
   
-  --text-primary: #e4e4e7;
-  --text-secondary: #a1a1aa;
-  --text-muted: #71717a;
-  --text-accent: #FDF4A1;
-  --text-accent-hover: #fff7b3;
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #64748b;
+  --text-accent: #7dd3fc;
+  --text-accent-hover: #bae6fd;
   
-  --border-color: #3f3f46;
-  --border-footer: #27272a;
-  --shadow-card: rgba(0, 0, 0, 0.3);
-  --shadow-card-hover: rgba(0, 0, 0, 0.5);
+  --border-color: #334155;
+  --border-footer: #1e293b;
+  --shadow-card: rgba(0, 0, 0, 0.4);
+  --shadow-card-hover: rgba(0, 0, 0, 0.6);
   
-  --btn-hover-bg: #2a2a40;
-  --category-bg: #27272a;
-  --category-active-bg: #3b82f6;
-  --link-hover-bg: #27272a;
-  --bio-bg: #27272a;
+  --btn-hover-bg: #3730a3;
+  --category-bg: #1e293b;
+  --category-active-bg: #6366f1;
+  --link-hover-bg: #3730a3;
+  --bio-bg: #1e293b;
 }
 
 /* 부드러운 전환 효과 */
@@ -328,8 +328,8 @@ body, .global-wrapper {
   transition: box-shadow .14s, background .3s;
   min-width: 350px;
   max-width: 350px;             
-  min-height: 260px;
-  max-height: 260px;
+  min-height: 250px;
+  max-height: 250px;
   box-sizing: border-box;
   justify-content: flex-start;
 }
@@ -415,8 +415,8 @@ body, .global-wrapper {
 }
 
 .category-thought {
-  background: #E0F2F1;
-  color: #00796B;
+  background: #FBE9E7;
+  color: #BF360C;
 }
 
 /* 다크모드 카테고리 색상 조정 */
@@ -446,8 +446,8 @@ body.dark-mode .category-ps {
 }
 
 body.dark-mode .category-thought {
-  background: rgba(224, 242, 241, 0.15);
-  color: #80CBC4;
+  background: rgba(251, 233, 231, 0.15);
+  color: #FFAB91;
 }
 
 .blog-card:hover {
@@ -829,7 +829,7 @@ body.dark-mode .category-thought {
 body.dark-mode .search-header-title,
 body.dark-mode .header-title,
 body.dark-mode .header-title-link {
-  color: #FDF4A1;
+  color: #e0e7ff;
   background: none;
   border: none;
   outline: none;
