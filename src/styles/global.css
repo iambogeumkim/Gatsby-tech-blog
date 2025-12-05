@@ -773,7 +773,7 @@ body, .global-wrapper {
   width: 240px;
   min-width: 240px;
   max-width: 240px;
-  height: 160px;
+  height: 120px;
   background: #f9efd4;
   display: flex;
   align-items: center;
