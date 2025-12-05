@@ -31,7 +31,7 @@ body.dark-mode {
   --bg-card: #1e293b;
   --bg-card-hover: #334155;
   --bg-search-bar: #1e293b;
-  --bg-footer: #020617;
+  --bg-footer: #1e3a8a;
   
   --text-primary: #f1f5f9;
   --text-secondary: #cbd5e1;
@@ -568,6 +568,24 @@ body.dark-mode .category-thought {
   font-size: 1.17rem;
   color: var(--text-primary);
   line-height: 1.8;
+}
+
+.post-content ul,
+.post-content ol {
+  padding-left: 1.2em;
+  margin-left: 0;
+}
+
+.post-content li {
+  margin-bottom: 0.4em;
+}
+
+.post-content ul ul,
+.post-content ol ol,
+.post-content ul ol,
+.post-content ol ul {
+  padding-left: 1.2em;
+  margin-top: 0.3em;
 }
 
 .blog-post-nav {
