@@ -328,8 +328,8 @@ body, .global-wrapper {
   transition: box-shadow .14s, background .3s;
   min-width: 350px;
   max-width: 350px;             
-  min-height: 260px;
-  max-height: 260px;              /* 정사각형 높이 */
+  min-height: 290px;
+  max-height: 290px;
   box-sizing: border-box;
   justify-content: flex-start;
 }
@@ -377,6 +377,69 @@ body, .global-wrapper {
   white-space: normal;
 }
 
+/* 카테고리 태그 스타일 */
+.blog-card-category {
+  display: inline-block;
+  margin-top: auto;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+
+/* 카테고리별 파스텔톤 색상 */
+.category-contribution {
+  background: #FFE4EC;
+  color: #C2185B;
+}
+
+.category-insight {
+  background: #E8DEF8;
+  color: #6750A4;
+}
+
+.category-paper {
+  background: #D4EDDA;
+  color: #2E7D4A;
+}
+
+.category-til {
+  background: #FFF3E0;
+  color: #E65100;
+}
+
+.category-ps {
+  background: #E3F2FD;
+  color: #1565C0;
+}
+
+/* 다크모드 카테고리 색상 조정 */
+body.dark-mode .category-contribution {
+  background: rgba(255, 228, 236, 0.15);
+  color: #FFB4C8;
+}
+
+body.dark-mode .category-insight {
+  background: rgba(232, 222, 248, 0.15);
+  color: #D0BCFF;
+}
+
+body.dark-mode .category-paper {
+  background: rgba(212, 237, 218, 0.15);
+  color: #81C995;
+}
+
+body.dark-mode .category-til {
+  background: rgba(255, 243, 224, 0.15);
+  color: #FFB74D;
+}
+
+body.dark-mode .category-ps {
+  background: rgba(227, 242, 253, 0.15);
+  color: #90CAF9;
+}
+
 .blog-card:hover {
   box-shadow: 0 4px 28px var(--shadow-card-hover);
   background: var(--bg-card-hover);
@@ -400,8 +463,8 @@ body, .global-wrapper {
   .blog-card {
     min-width: 92vw;
     max-width: 92vw;
-    min-height: 200px;
-    max-height: 220px;
+    min-height: 230px;
+    max-height: 250px;
   }
 }
 
@@ -854,6 +917,7 @@ body.dark-mode .header-title-link {
   width: 240px;
   min-width: 240px;
   max-width: 240px;
+  height: 120px;
   background: #f9efd4;
   display: flex;
   align-items: center;

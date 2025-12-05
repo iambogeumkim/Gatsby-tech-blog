@@ -52,6 +52,7 @@ const BlogIndex = ({ data, location }) => {
         <div className="blog-card-grid">
           {posts.slice(0, numPostsToShow).map(post => {
             const title = post.frontmatter.title || post.fields.slug
+            const category = post.frontmatter.category
             return (
               <Link to={post.fields.slug} key={post.fields.slug} className="blog-card">
                 {post.frontmatter.thumbnail && (
@@ -67,6 +68,11 @@ const BlogIndex = ({ data, location }) => {
                     ? post.frontmatter.description
                     : post.excerpt}
                 </div>
+                {category && (
+                  <span className={`blog-card-category category-${category.toLowerCase()}`}>
+                    {category}
+                  </span>
+                )}
               </Link>
             )
           })}
