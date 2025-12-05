@@ -303,7 +303,8 @@ body, .global-wrapper {
 }
 
 .blog-category-nav a.active,
-.blog-category-nav a:hover {
+.blog-category-nav a:hover,
+.blog-category-nav a.category-btn--active {
   background: var(--category-active-bg);
   color: #fff;
 }
@@ -326,8 +327,8 @@ body, .global-wrapper {
   text-decoration: none;
   color: var(--text-primary);
   transition: box-shadow .14s, background .3s;
-  min-width: 350px;
-  max-width: 350px;             
+  min-width: 300px;
+  max-width: 300px;             
   min-height: 250px;
   max-height: 250px;
   box-sizing: border-box;
