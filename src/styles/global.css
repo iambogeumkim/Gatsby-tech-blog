@@ -971,14 +971,17 @@ body.dark-mode .header-title-link {
   color: var(--text-accent);
   margin-bottom: 14px;
   margin-top: 32px;
-  -webkit-line-clamp: 2;       /* 최대 2줄 */
-
-  -webkit-box-orient: vertical;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .preview-desc {
   font-size: 1.07rem;
   color: var(--text-accent);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .post-outer-wrapper {
