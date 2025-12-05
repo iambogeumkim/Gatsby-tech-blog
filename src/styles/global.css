@@ -328,8 +328,8 @@ body, .global-wrapper {
   transition: box-shadow .14s, background .3s;
   min-width: 350px;
   max-width: 350px;             
-  min-height: 290px;
-  max-height: 290px;
+  min-height: 260px;
+  max-height: 260px;
   box-sizing: border-box;
   justify-content: flex-start;
 }
@@ -414,6 +414,11 @@ body, .global-wrapper {
   color: #1565C0;
 }
 
+.category-thought {
+  background: #E0F2F1;
+  color: #00796B;
+}
+
 /* 다크모드 카테고리 색상 조정 */
 body.dark-mode .category-contribution {
   background: rgba(255, 228, 236, 0.15);
@@ -440,6 +445,11 @@ body.dark-mode .category-ps {
   color: #90CAF9;
 }
 
+body.dark-mode .category-thought {
+  background: rgba(224, 242, 241, 0.15);
+  color: #80CBC4;
+}
+
 .blog-card:hover {
   box-shadow: 0 4px 28px var(--shadow-card-hover);
   background: var(--bg-card-hover);
@@ -463,8 +473,8 @@ body.dark-mode .category-ps {
   .blog-card {
     min-width: 92vw;
     max-width: 92vw;
-    min-height: 230px;
-    max-height: 250px;
+    min-height: 200px;
+    max-height: 220px;
   }
 }
 
