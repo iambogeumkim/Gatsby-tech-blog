@@ -22,7 +22,7 @@ const BlogHeaderTyping = () => {
   }, []);
   return (
     <span className="search-header-title typing-animate">
-      <Link to="/" style={{ textDecoration: "none", color: "#2563FF" }}>
+      <Link to="/" className="header-title-link">
         <span ref={ref}></span>
       </Link>
     </span>

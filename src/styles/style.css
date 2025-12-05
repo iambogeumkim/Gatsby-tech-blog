@@ -122,6 +122,16 @@ h1 {
   color: var(--color-heading-black);
 }
 
+/* 다크모드 헤딩 색상 */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+  color: #ffffff;
+}
+
 h2 {
   font-size: var(--fontSize-5);
 }

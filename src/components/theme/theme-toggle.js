@@ -31,7 +31,7 @@ const ThemeToggle = () => {
       type="button"
     >
       <span role="img" aria-label={darkMode ? "Moon" : "Sun"}>
-        {darkMode ? "🌙" : "🌞"}
+        {darkMode ? "🌞" : "🌙"}
       </span>
     </button>
   )
