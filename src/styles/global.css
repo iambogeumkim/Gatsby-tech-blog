@@ -824,10 +824,8 @@ body.dark-mode .category-thought {
 }
 
 .search-header-bar {
-  width: 90%;
-  max-width: 830px;
+  width: min(90vw, 830px);
   min-height: 62px;
-  justify-content: center;       /* 🌟 모든 내용 가로 중앙 */
   background: var(--bg-search-bar);
   box-shadow: 0 2px 24px 0 var(--shadow-card);
   border-radius: 2.7em;
@@ -928,7 +926,7 @@ body.dark-mode .header-title-link {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--bg-primary);
+  background: transparent;
   padding-top: 36px;
   padding-bottom: 20px;
 }
