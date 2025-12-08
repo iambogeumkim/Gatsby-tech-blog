@@ -223,7 +223,9 @@ body {
   color: var(--text-primary);
   margin: 0;
   min-height: 100vh;
-  font-family: 'Noto Sans KR', 'Segoe UI', 'Arial', Sans-serif;
+  font-family: "GMarketSans", -apple-system, BlinkMacSystemFont, system-ui, 
+    Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", 
+    "Noto Sans KR", "Malgun Gothic", sans-serif;
 }
 
 .global-wrapper {
@@ -640,7 +642,7 @@ body.dark-mode .category-error {
 }
 
 .post-title {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: var(--text-accent);
   margin: 0 0 4px 0;
@@ -765,7 +767,7 @@ body.dark-mode .category-error {
 .footer-title {
   font-size: 7vw;
   font-weight: 700;
-  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  font-family: "GMarketSans", -apple-system, BlinkMacSystemFont, sans-serif;
   letter-spacing: -2.2px;
   color: #fff;
   line-height: 1.1;
@@ -779,7 +781,7 @@ body.dark-mode .category-error {
   gap: 120px;
   padding: 36px 3vw 42px 3vw;
   border-top: 1px solid var(--border-footer);
-  font-family: 'Inter', sans-serif;
+  font-family: "GMarketSans", sans-serif;
   font-size: 1.25rem;
 }
 
@@ -926,7 +928,7 @@ body.dark-mode .category-error {
 }
 
 .search-header-title {
-  font-family: 'Inter', 'Noto Sans KR', 'Segoe UI', sans-serif;
+  font-family: "GMarketSans", -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 2.1rem;
   color: var(--text-accent);
   font-weight: 700;

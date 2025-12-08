@@ -24,7 +24,27 @@ const DarkModeScript = () => {
 /**
  * @type {import('gatsby').GatsbySSR['onRenderBody']}
  */
-exports.onRenderBody = ({ setHtmlAttributes, setPreBodyComponents }) => {
+exports.onRenderBody = ({ setHtmlAttributes, setPreBodyComponents, setHeadComponents }) => {
   setHtmlAttributes({ lang: `ko` })
   setPreBodyComponents([React.createElement(DarkModeScript, { key: "dark-mode-script" })])
+  
+  // Pacifico 폰트 (헤더 타이틀용)
+  setHeadComponents([
+    React.createElement("link", {
+      key: "google-fonts-preconnect",
+      rel: "preconnect",
+      href: "https://fonts.googleapis.com",
+    }),
+    React.createElement("link", {
+      key: "google-fonts-preconnect-static",
+      rel: "preconnect",
+      href: "https://fonts.gstatic.com",
+      crossOrigin: "anonymous",
+    }),
+    React.createElement("link", {
+      key: "pacifico-font",
+      rel: "stylesheet",
+      href: "https://fonts.googleapis.com/css2?family=Pacifico&display=swap",
+    }),
+  ])
 }
