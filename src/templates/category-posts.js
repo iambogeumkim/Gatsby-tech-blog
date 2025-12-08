@@ -11,6 +11,8 @@ const CategoryPost = ({ data, location, pageContext }) => {
   const posts = data.allMarkdownRemark.nodes;
   const categories = data.categoryData.categoryList;
   const [numPostsToShow, setNumPostsToShow] = useState(3);
+  
+  categories.sort();
 
   // 문자열을 slug 형태로 변환하는 함수
   const slugify = (str) => str.toLowerCase().replace(/\s+/g, '-');

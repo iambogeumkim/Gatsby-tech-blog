@@ -11,6 +11,8 @@ const BlogIndex = ({ data, location }) => {
   const [numPostsToShow, setNumPostsToShow] = React.useState(6)
   const posts = data.allMarkdownRemark.nodes
   const categories = data.allMarkdownRemark.categoryList
+  
+  categories.sort()
 
   if (posts.length === 0) {
     return (
