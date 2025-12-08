@@ -1,5 +1,5 @@
 ---
-title: "250904 TIL"
+title: "250904 TIL: SSH"
 date: "2025-09-04T12:00:00.000+09:00"
 description: "1 day 1 lesson"
 category: "TIL"

@@ -287,9 +287,28 @@ body {
 
 .blog-category-nav {
   display: flex;
-  justify-content: center;
-  gap: 38px;
-  margin-bottom: 38px;
+  justify-content: flex-start;
+  gap: 12px;
+  
+  /* 중앙 정렬 트릭: 내용이 적을 땐 가운데, 많으면 스크롤 */
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto 38px auto;
+
+  /* 가로 스크롤 설정 */
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  padding-bottom: 4px; /* 스크롤바 영역 확보 및 여백 */
+  -webkit-overflow-scrolling: touch;
+  
+  /* 스크롤바 숨기기 */
+  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;  /* IE/Edge */
+}
+
+/* Chrome, Safari, Opera 스크롤바 숨기기 */
+.blog-category-nav::-webkit-scrollbar {
+  display: none;
 }
 
 .blog-category-nav a {
@@ -301,6 +320,10 @@ body {
   font-size: 1.08rem;
   text-decoration: none;
   transition: background .17s, color .15s;
+  
+  /* 텍스트 줄바꿈 방지 및 형태 유지 */
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .blog-category-nav a.active,
@@ -423,6 +446,11 @@ body {
   color: #BF360C;
 }
 
+.category-error {
+  background: #FFEBEE;
+  color: #D32F2F;
+}
+
 /* 다크모드 카테고리 색상 조정 */
 body.dark-mode .category-contribution {
   background: rgba(255, 228, 236, 0.15);
@@ -452,6 +480,11 @@ body.dark-mode .category-ps {
 body.dark-mode .category-thought {
   background: rgba(251, 233, 231, 0.15);
   color: #FFAB91;
+}
+
+body.dark-mode .category-error {
+  background: rgba(255, 235, 238, 0.15);
+  color: #FF8A80;
 }
 
 .blog-card:hover {
