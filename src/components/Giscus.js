@@ -6,6 +6,9 @@ const Giscus = () => {
   useEffect(() => {
     if (!ref.current || ref.current.hasChildNodes()) return
 
+    const isDark = document.body.classList.contains("dark-mode")
+    const initialTheme = isDark ? "dark" : "light"
+
     const script = document.createElement("script")
     script.src = "https://giscus.app/client.js"
     script.async = true
@@ -20,7 +23,7 @@ const Giscus = () => {
     script.setAttribute("data-reactions-enabled", "1")
     script.setAttribute("data-emit-metadata", "0")
     script.setAttribute("data-input-position", "bottom")
-    script.setAttribute("data-theme", "preferred_color_scheme")
+    script.setAttribute("data-theme", initialTheme)
     script.setAttribute("data-lang", "ko")
     script.setAttribute("data-loading", "lazy")
 

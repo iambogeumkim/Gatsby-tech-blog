@@ -4,6 +4,7 @@ import { Link, graphql } from "gatsby"
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import { getCategoryEmoji } from "../utils/category-emoji"
 
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
@@ -40,10 +41,12 @@ const BlogIndex = ({ data, location }) => {
             <Link
               key={category}
               to={`/${slugify(category)}/`}
-              className="category-btn"
+              className="category-btn icon-only"
               activeClassName="category-btn--active"
+              aria-label={category}
             >
-              {category}
+              <span className="category-icon">{getCategoryEmoji(category)}</span>
+              <span className="category-text">{category}</span>
             </Link>
           ))}
         </nav>

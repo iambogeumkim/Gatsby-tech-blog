@@ -3,6 +3,7 @@ import { Link } from "gatsby";
 import Layout from "../components/layout";
 import Bio from "../components/bio";
 import { graphql } from "gatsby";
+import { getCategoryEmoji } from "../utils/category-emoji";
 
 const CategoryPost = ({ data, location, pageContext }) => {
   const { category } = pageContext;
@@ -22,16 +23,19 @@ const CategoryPost = ({ data, location, pageContext }) => {
 
         {/* 카테고리 내비게이션 */}
         <nav className="blog-category-nav">
-          <Link to="/" className="category-btn">
-            All Posts
+          <Link to="/" className="category-btn icon-only">
+            <span className="category-icon">🏠</span>
+            <span className="category-text">All Posts</span>
           </Link>
           {categories.map(cat => (
             <Link
               key={cat}
               to={`/${slugify(cat)}/`}
-              className={`category-btn ${cat === category ? 'category-btn--active' : ''}`}
+              className={`category-btn icon-only ${cat === category ? 'category-btn--active' : ''}`}
+              aria-label={cat}
             >
-              {cat}
+              <span className="category-icon">{getCategoryEmoji(cat)}</span>
+              <span className="category-text">{cat}</span>
             </Link>
           ))}
         </nav>

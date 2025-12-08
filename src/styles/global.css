@@ -312,18 +312,73 @@ body {
 }
 
 .blog-category-nav a {
-  padding: 10px 22px;
+  padding: 10px 16px;
   color: var(--text-accent);
-  background: var(--category-bg);
+  background: transparent;
   border-radius: 16px;
   font-weight: 500;
   font-size: 1.08rem;
   text-decoration: none;
-  transition: background .17s, color .15s;
+  transition: all 0.2s ease;
   
   /* 텍스트 줄바꿈 방지 및 형태 유지 */
   white-space: nowrap;
   flex-shrink: 0;
+
+  /* Flexbox로 아이콘/텍스트 정렬 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 44px; /* 최소 너비 확보 */
+  height: 44px;    /* 높이 고정 */
+  box-sizing: border-box;
+  
+  position: relative; /* 구분선 위치 기준 */
+}
+
+/* 카테고리 사이 구분선 (은은한 실선) */
+.blog-category-nav a:not(:last-of-type)::after {
+  content: "";
+  position: absolute;
+  right: -6.5px; /* gap 12px의 중간 지점 */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 12px;
+  background-color: var(--text-muted);
+  opacity: 0.3; /* 은은하게 항상 유지 */
+  pointer-events: none;
+}
+
+/* 기본 상태: 아이콘만 보이고 텍스트는 숨김 */
+.category-btn.icon-only .category-text {
+  display: none;
+  opacity: 0;
+  transform: translateX(-5px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.category-btn.icon-only .category-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+/* Hover 또는 Active 상태: 텍스트 보이기 */
+.blog-category-nav a:hover,
+.blog-category-nav a.active,
+.blog-category-nav a.category-btn--active {
+  padding: 10px 22px; /* 너비 확장 자연스럽게 */
+  background: var(--category-active-bg);
+  color: #fff;
+}
+
+.blog-category-nav a:hover .category-text,
+.blog-category-nav a.active .category-text,
+.blog-category-nav a.category-btn--active .category-text {
+  display: inline-block;
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .blog-category-nav a.active,
