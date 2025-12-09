@@ -18,13 +18,10 @@ category: "Bugfix"
             
         ```json
         terraform {
-              # 'backend "s3"'는 테라폼이 생성한 인프라의 상태를 기록하는 .tfstate 파일을
-              # 로컬 컴퓨터가 아닌, 지정된 AWS S3 버킷에 저장하도록 설정합니다.
-              # 이렇게 하면 여러 사람이 협업하거나, 다른 컴퓨터에서 작업해도 동일한 상태를 공유할 수 있습니다.
               # backend "s3" {
-              #   bucket = "fikad-shorts-terraform-tfstates" # 상태 파일을 저장할 S3 버킷 이름입니다. 본인 소유의 버킷 이름으로 변경해야 합니다. -> terraform state 관리용
-              #   key    = "yt-shorts-crawler/terraform.tfstate" # 버킷 내에서 상태 파일이 저장될 경로와 이름입니다.
-              #   region = "ap-northeast-2" # S3 버킷이 위치한 AWS 리전입니다.
+              #   bucket = "bucket-name" 
+              #   key    = "key-name" # 버킷 내에서 상태 파일이 저장될 경로와 이름
+              #   region = "ap-northeast-2" # S3 버킷이 위치한 AWS 리전
               # }
             
               required_providers {

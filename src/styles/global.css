@@ -503,6 +503,11 @@ body {
   color: #BF360C;
 }
 
+.category-bugfix {
+  background: #ECEFF1;
+  color: #37474F;
+}
+
 .category-error {
   background: #FFEBEE;
   color: #D32F2F;
@@ -537,6 +542,11 @@ body.dark-mode .category-ps {
 body.dark-mode .category-thought {
   background: rgba(251, 233, 231, 0.15);
   color: #FFAB91;
+}
+
+body.dark-mode .category-bugfix {
+  background: rgba(236, 239, 241, 0.15);
+  color: #B0BEC5;
 }
 
 body.dark-mode .category-error {
