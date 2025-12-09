@@ -4,7 +4,7 @@ const CATEGORY_EMOJI = {
   Paper: "📄",
   TIL: "📝",
   Thought: "💭",
-  "Trouble Shooting": "🛠️",
+  Bugfix: "🛠️",
 }
 
 export const getCategoryEmoji = (category) => {
