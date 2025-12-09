@@ -18,20 +18,20 @@ category: "Bugfix"
             
         ```json
         terraform {
-              # backend "s3" {
-              #   bucket = "bucket-name" 
-              #   key    = "key-name" # 버킷 내에서 상태 파일이 저장될 경로와 이름
-              #   region = "ap-northeast-2" # S3 버킷이 위치한 AWS 리전
-              # }
-            
-              required_providers {
+            # backend "s3" {
+            #   bucket = "bucket-name" 
+            #   key    = "key-name" # 버킷 내에서 상태 파일이 저장될 경로와 이름
+            #   region = "ap-northeast-2" # S3 버킷이 위치한 AWS 리전
+            # }
+        
+            required_providers {
                 aws = {
-                  source = "hashicorp/aws"
+                    source = "hashicorp/aws"
                 }
                 docker = {
-                  source = "kreuzwerker/docker"
+                    source = "kreuzwerker/docker"
                 }
-              }
+            }
         ```
 
 - 위 과정 진행 후 해결됐다고 생각했는데 특정 명령어 실행할 경우 멈추는 상황 똑같이 발생
