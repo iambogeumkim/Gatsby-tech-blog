@@ -399,6 +399,54 @@ span[itemProp="headline"]:hover {
   box-shadow: 0 6px 20px rgba(37,99,255,0.3);
 }
 
+/* ToC Styles */
+.toc-list {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.toc-item {
+  margin-bottom: 8px !important;
+}
+
+.toc-link {
+  display: block;
+  text-decoration: none !important;
+  color: inherit;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+/* H1 Items (depth 1) */
+.toc-depth-1 .toc-link {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.toc-depth-1 .toc-link:hover {
+  background-color: #2563FF;
+  color: #fff !important;
+}
+
+/* H2 Items (depth 2) */
+.toc-depth-2 {
+  padding-left: 16px !important;
+}
+
+.toc-depth-2 .toc-link {
+  font-size: 14px;
+  font-weight: normal;
+  color: #888; /* Lighter color */
+}
+
+.toc-depth-2 .toc-link:hover {
+  color: black !important;
+  background-color: transparent;
+}
+
+
 /* Media queries */
 
 @media (max-width: 42rem) {
