@@ -10,7 +10,7 @@ const BlogPostTemplate = ({
   location,
 }) => {
   const siteTitle = site.siteMetadata?.title || `Title`
-  const h1Headings = post.headings.filter(heading => heading.depth === 1)
+  const tocHeadings = post.headings.filter(heading => heading.depth <= 2)
 
   function slugify(text) {
     return text
@@ -82,10 +82,21 @@ const BlogPostTemplate = ({
         >
           <nav className="sidebar-toc">
             <h4 className="toc-title">📌 Table of Contents</h4>
-            <ul>
-              {h1Headings.map((heading, idx) => (
-                <li key={idx}>
-                  <a href={`#${heading.id}`}>
+            <ul style={{ listStyle: `none`, padding: 0 }}>
+              {tocHeadings.map((heading, idx) => (
+                <li key={idx} style={{ 
+                  paddingLeft: heading.depth === 2 ? '16px' : '0',
+                  marginBottom: '8px'
+                }}>
+                  <a 
+                    href={`#${heading.id}`}
+                    style={{
+                      textDecoration: 'none',
+                      color: 'inherit',
+                      fontSize: heading.depth === 1 ? '16px' : '14px',
+                      fontWeight: heading.depth === 1 ? 'bold' : 'normal'
+                    }}
+                  >
                     {heading.value}
                   </a>
                 </li>
