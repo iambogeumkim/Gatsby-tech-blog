@@ -1,92 +1,83 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
-
-import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-import { getCategoryEmoji } from "../utils/category-emoji"
 
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
-  const [numPostsToShow, setNumPostsToShow] = React.useState(6)
   const posts = data.allMarkdownRemark.nodes
-  const categories = data.allMarkdownRemark.categoryList
+
+  // Sort posts explicitly if needed, though query handles it
   
-  categories.sort()
-
-  if (posts.length === 0) {
-    return (
-      <Layout location={location} title={siteTitle}>
-        {/* <Bio /> */}
-        <p>
-          No blog posts found. Add markdown posts to "content/blog" (or the
-          directory you specified for the "gatsby-source-filesystem" plugin in
-          gatsby-config.js).
-        </p>
-      </Layout>
-    )
-  }
-
-  // 문자열을 slug 형태로 변환하는 함수
-  const slugify = (str) => str.toLowerCase().replace(/\s+/g, '-')
-
   return (
-    <Layout location={location} title={siteTitle}>
-      <Seo />
-      <div className="blog-index-wrapper">
-        {/* 큰 제목 */}
-        <h1 className="blog-main-title">All posts</h1>
+    <Layout location={location} title={siteTitle} currentFileName="README.md">
+      <Seo title="Home" />
+      {/* Padding reduced from '20px 40px' to '20px' */}
+      <div className="vscode-readme-container" style={{ maxWidth: '800px', margin: '0 auto', padding: '20px' }}>
+        
+        {/* Header Section */}
+        <div style={{ marginBottom: '20px' }}>
+            <h1 style={{ 
+                fontSize: '2.5rem', 
+                borderBottom: 'none', 
+                marginBottom: '10px', 
+                fontWeight: 'bold',
+                color: 'var(--vscode-fg)' 
+            }}>
+                Gold Vibes Only <span role="img" aria-label="wave">👋</span>
+            </h1>
+            <p style={{ fontSize: '1.1rem', color: 'var(--vscode-fg-secondary)', lineHeight: '1.6', marginBottom: 0 }}>
+                Welcome to my tech blog. Here I document my learning journey, errors, and insights.
+            </p>
+        </div>
 
-        {/* 카테고리 내비게이션 */}
-        <nav className="blog-category-nav">
-          {categories.map(category => (
-            <Link
-              key={category}
-              to={`/${slugify(category)}/`}
-              className="category-btn icon-only"
-              activeClassName="category-btn--active"
-              aria-label={category}
-            >
-              <span className="category-icon">{getCategoryEmoji(category)}</span>
-              <span className="category-text">{category}</span>
-            </Link>
-          ))}
-        </nav>
+        {/* Recent Posts Section */}
+        <h2 style={{ 
+            borderBottom: '1px solid var(--vscode-border)', 
+            paddingBottom: '10px', 
+            marginBottom: '10px',
+            marginTop: '0',
+            color: 'var(--vscode-fg)'
+        }}>
+            Latest Posts
+        </h2>
 
-        {/* 카드 그리드로 글 리스트 출력 */}
-        <div className="blog-card-grid">
-          {posts.slice(0, numPostsToShow).map(post => {
+        <p style={{ 
+            fontSize: '1.1rem', 
+            color: 'var(--vscode-fg-secondary)', 
+            lineHeight: '1.6', 
+            marginTop: '0',
+            marginBottom: '20px' 
+        }}>
+            This section will be updated periodically.
+        </p>
+
+        <ul style={{ listStyle: 'none', padding: 0 }}>
+          {posts.map(post => {
             const title = post.frontmatter.title || post.fields.slug
-            const category = post.frontmatter.category
             return (
-              <Link to={post.fields.slug} key={post.fields.slug} className="blog-card">
-                {post.frontmatter.thumbnail && (
-                  <img
-                    src={post.frontmatter.thumbnail}
-                    alt={title}
-                    className="blog-card-thumb"
-                  />
-                )}
-                <div className="blog-card-title">{title}</div>
-                <div className="blog-card-summary">
-                  {post.frontmatter.description
-                    ? post.frontmatter.description
-                    : post.excerpt}
-                </div>
-                {category && (
-                  <span className={`blog-card-category category-${category.toLowerCase()}`}>
-                    {category}
-                  </span>
-                )}
-              </Link>
+              <li key={post.fields.slug} style={{ marginBottom: '12px', display: 'flex', alignItems: 'baseline' }}>
+                <span style={{ 
+                    color: 'var(--vscode-fg-secondary)', 
+                    fontFamily: 'monospace', 
+                    marginRight: '15px', 
+                    minWidth: '140px',
+                    fontSize: '0.9rem'
+                }}>
+                    - [{post.frontmatter.date}]
+                </span>
+                <Link to={post.fields.slug} style={{ 
+                    textDecoration: 'none', 
+                    color: 'var(--vscode-accent)',
+                    fontSize: '1rem'
+                }}>
+                  {title}
+                </Link>
+              </li>
             )
           })}
-        </div>
-        {numPostsToShow < posts.length && (
-          <button className="load-more-btn" onClick={() => setNumPostsToShow(numPostsToShow + 6)}>
-            More
-          </button>
-        )}
+        </ul>
+
       </div>
     </Layout>
   )
@@ -103,8 +94,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
-      categoryList: distinct(field: frontmatter___category)
+    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }, limit: 7) {
       nodes {
         excerpt
         fields {
@@ -112,7 +102,7 @@ export const pageQuery = graphql`
         }
         frontmatter {
           title
-          date(formatString: "MMMM DD, YYYY")
+          date(formatString: "YYYY-MM-DD")
           description
           category
         }

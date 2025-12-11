@@ -590,6 +590,7 @@ body.dark-mode .category-error {
   width: 100%;
   margin-bottom: 32px;
   padding: 48px 48px;
+  font-family: var(--font-post-body, 'Sweet', -apple-system, BlinkMacSystemFont, system-ui, sans-serif);
 }
 
 .sidebar-toc {
@@ -669,6 +670,7 @@ body.dark-mode .category-error {
   font-size: 1.17rem;
   color: var(--text-primary);
   line-height: 1.8;
+  font-family: var(--font-post-body, 'Sweet', -apple-system, BlinkMacSystemFont, system-ui, sans-serif);
 }
 
 .post-content ul,

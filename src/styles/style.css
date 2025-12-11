@@ -25,6 +25,64 @@
   font-display: swap;
 }
 
+/* 본문 폰트 옵션 1: SUITE 폰트 */
+@font-face {
+  font-family: 'Sweet';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sweet';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sweet';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sweet';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sweet';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sweet';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-ExtraBold.woff2') format('woff2');
+  font-weight: 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sweet';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Heavy.woff2') format('woff2');
+  font-weight: 900;
+  font-display: swap;
+}
+
+/* 본문 폰트 옵션 2: Arita-dotum 폰트 */
+@font-face {
+  font-family: 'ArittaDodum';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Arita-dotum-Medium.woff') format('woff');
+  font-weight: normal;
+  font-display: swap;
+}
+
 :root {
   --maxWidth-none: "none";
   --maxWidth-xs: 20rem;
@@ -61,6 +119,14 @@
     "Noto Sans KR", "Malgun Gothic", sans-serif;
   --font-body: var(--fontFamily-sans);
   --font-heading: var(--fontFamily-sans);
+  
+  /* ============================================
+     본문 폰트: SUITE 폰트 (선택됨)
+     ============================================ */
+  --font-post-body: 'Sweet', -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  
+  /* 참고: Arita-dotum 폰트로 변경하려면 아래 주석을 해제하고 위 줄을 주석 처리하세요 */
+  /* --font-post-body: 'ArittaDodum', -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif; */
   --fontWeight-normal: 400;
   --fontWeight-bold: 700;
   --fontWeight-black: 900;
@@ -309,10 +375,12 @@ a:focus {
 .post-list-item {
   margin-bottom: var(--spacing-8);
   margin-top: var(--spacing-8);
+  font-family: var(--font-post-body);
 }
 
 .post-list-item p {
   margin-bottom: var(--spacing-0);
+  font-family: var(--font-post-body);
 }
 
 .post-list-item h2 {
@@ -321,6 +389,7 @@ a:focus {
   color: black;
   margin-bottom: var(--spacing-2);
   margin-top: var(--spacing-0);
+  font-family: var(--font-post-body);
 }
 
 .post-list-item header {
@@ -350,6 +419,10 @@ a:focus {
   border-radius: 100%;
 }
 
+.blog-post {
+  font-family: var(--font-post-body);
+}
+
 .blog-post header h1 {
   margin: var(--spacing-0) var(--spacing-0) var(--spacing-4) var(--spacing-0);
 }
@@ -357,6 +430,15 @@ a:focus {
 .blog-post header p {
   font-size: var(--fontSize-2);
   font-family: var(--font-heading);
+}
+
+/* 본문 콘텐츠 폰트 적용 */
+.blog-post .post-content,
+.blog-post p,
+.blog-post li,
+.blog-post ul,
+.blog-post ol {
+  font-family: var(--font-post-body);
 }
 
 .blog-post-nav ul {
@@ -460,11 +542,6 @@ span[itemProp="headline"]:hover {
   }
 }
 
-/* Start https://www.cursors-4u.com */ 
-*{
-  cursor: url(https://cur.cursors-4u.net/games/gam-4/gam307.ani), url(https://cur.cursors-4u.net/games/gam-4/gam307.png), auto !important;
-} 
-/* End https://www.cursors-4u.com */
 .preview-thumb-wrapper {
   width: 240px;
   min-width: 240px;

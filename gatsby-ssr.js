@@ -5,6 +5,18 @@
  */
 
 const React = require("react")
+// Since gatsby-ssr runs in Node, we might need to handle the import differently if it wasn't transpiled,
+// but usually Gatsby handles ES6 imports in gatsby-ssr.js if the project is set up for it.
+// However, the existing file uses `const React = require("react")` style.
+// Let's stick to CommonJS or verify if I can mix. 
+// Safest is to require the compiled file or just use standard import if Gatsby handles it.
+// Most Gatsby v2+ projects support ES6 in gatsby-ssr.js.
+// Let's try imports. If it fails, I'll revert to require.
+// Actually, I need to point to the file.
+// Let's check how SidebarContext is exported. It uses `export const ...`.
+// So I should use `import` or `require(...).SidebarProvider`.
+
+import { SidebarProvider } from "./src/context/SidebarContext"
 
 // 다크모드 초기화 스크립트 - 페이지 로드 시 깜빡임 방지
 const DarkModeScript = () => {
@@ -24,7 +36,7 @@ const DarkModeScript = () => {
 /**
  * @type {import('gatsby').GatsbySSR['onRenderBody']}
  */
-exports.onRenderBody = ({ setHtmlAttributes, setPreBodyComponents, setHeadComponents }) => {
+export const onRenderBody = ({ setHtmlAttributes, setPreBodyComponents, setHeadComponents }) => {
   setHtmlAttributes({ lang: `ko` })
   setPreBodyComponents([React.createElement(DarkModeScript, { key: "dark-mode-script" })])
   
@@ -48,3 +60,7 @@ exports.onRenderBody = ({ setHtmlAttributes, setPreBodyComponents, setHeadCompon
     }),
   ])
 }
+
+export const wrapRootElement = ({ element }) => (
+  <SidebarProvider>{element}</SidebarProvider>
+)

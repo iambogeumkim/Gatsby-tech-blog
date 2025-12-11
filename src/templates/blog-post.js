@@ -1,6 +1,5 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
-import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import Giscus from "../components/Giscus"
@@ -12,90 +11,125 @@ const BlogPostTemplate = ({
   const siteTitle = site.siteMetadata?.title || `Title`
   const tocHeadings = post.headings.filter(heading => heading.depth <= 2)
 
-  function slugify(text) {
-    return text
-      .toLowerCase()
-      .replace(/\s+/g, '-')
-      .replace(/[^\w\-]+/g, '')
-  }
-
   return (
-    <Layout location={location} title={siteTitle}>
-      <div className="post-outer-wrapper" style={{ position: 'relative', maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
-        {/* 본문 박스만큼만 max-width! */}
-        <div className="post-main-area" style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <article
-            className="blog-post"
-            itemScope
-            itemType="http://schema.org/Article"
-          >
-            <header className="post-header">
-              <h1 className="post-title" itemProp="headline">{post.frontmatter.title}</h1>
-              <div className="post-meta">{post.frontmatter.date}</div>
-            </header>
-            <section
-              className="post-content"
-              dangerouslySetInnerHTML={{ __html: post.html }}
-              itemProp="articleBody"
-            />
-            <footer>
-              {/* 이전/다음 네비 */}
-              <nav className="blog-post-nav">
-                <ul style={{
-                  display: `flex`, flexWrap: `wrap`, justifyContent: `space-between`,
-                  listStyle: `none`, padding: 0,
-                }}>
-                  <li>
+    <Layout 
+        location={location} 
+        title={siteTitle}
+        currentFileName={post.frontmatter.title + ".md"}
+        category={post.frontmatter.category || "Uncategorized"}
+    >
+      {/* Wrapper for centering content and positioning minimap relative to it */}
+      <div style={{ position: 'relative', maxWidth: '1000px', margin: '0 auto' }}>
+          
+          {/* Main Content Area */}
+          <div className="vscode-readme-container" style={{ padding: '20px' }}>
+            
+            <article
+                className="blog-post"
+                itemScope
+                itemType="http://schema.org/Article"
+            >
+                <header>
+                    <h1 itemProp="headline" style={{ 
+                        fontSize: '2.5rem', 
+                        borderBottom: 'none', 
+                        marginBottom: '10px', 
+                        marginTop: '0',
+                        fontWeight: 'bold', 
+                        color: 'var(--vscode-fg)' 
+                    }}>
+                        {post.frontmatter.title}
+                    </h1>
+                    <p style={{ fontSize: '1rem', color: 'var(--vscode-fg-secondary)', marginBottom: '40px' }}>
+                        {post.frontmatter.date}
+                    </p>
+                </header>
+
+                <section
+                    className="post-content"
+                    dangerouslySetInnerHTML={{ __html: post.html }}
+                    itemProp="articleBody"
+                />
+                
+                {/* Footer Navigation as Python Code */}
+                <nav className="blog-post-nav" style={{ marginTop: '60px', marginBottom: '40px' }}>
+                    <div style={{color: 'var(--vscode-fg)'}}><span className="variable">navigation</span> = {'{'}</div>
                     {previous && (
-                      <Link to={previous.fields.slug} rel="prev">
-                        ← {previous.frontmatter.title}
-                      </Link>
+                        <div className="indent">
+                            <span className="meta-string">"previous"</span>: <Link to={previous.fields.slug} rel="prev" style={{color: 'var(--vscode-accent)'}}>"{previous.frontmatter.title}"</Link>,
+                        </div>
                     )}
-                  </li>
-                  <li>
                     {next && (
-                      <Link to={next.fields.slug} rel="next">
-                        {next.frontmatter.title} →
-                      </Link>
+                        <div className="indent">
+                            <span className="meta-string">"next"</span>: <Link to={next.fields.slug} rel="next" style={{color: 'var(--vscode-accent)'}}>"{next.frontmatter.title}"</Link>
+                        </div>
                     )}
-                  </li>
+                    <div style={{color: 'var(--vscode-fg)'}}>{'}'}</div>
+                </nav>
+            </article>
+
+            {/* Comments Section */}
+            <div style={{ marginTop: '20px' }}>
+                <Giscus />
+            </div>
+
+          </div>
+
+          {/* Minimap Sidebar - Positioned absolute to the right of the content */}
+          <aside 
+            className="vscode-minimap-toc" 
+            style={{
+                position: 'fixed', // Use fixed to stay on screen
+                left: '50%', // Center base
+                marginLeft: '520px', // 1000px/2 + 20px padding
+                top: '100px',
+                width: '200px',
+                maxHeight: 'calc(100vh - 120px)',
+                overflowY: 'auto',
+                display: 'none', // Hidden by default on small screens
+                '@media (minWidth: 1500px)': { // This needs to be handled by CSS or logic
+                    display: 'block'
+                }
+            }}
+          >
+             {/* Note: Inline media queries don't work in React style prop. 
+                 We'll rely on the class 'vscode-minimap-toc' and add specific overrides if needed.
+                 Or better, just use the class and add a style block for positioning.
+             */}
+             <style>{`
+                @media (min-width: 1450px) {
+                    .vscode-minimap-toc-container {
+                        display: block !important;
+                    }
+                }
+                .vscode-minimap-toc-container {
+                    display: none;
+                    position: fixed;
+                    top: 100px;
+                    left: 50%;
+                    margin-left: 520px; /* Half of 1000px content + gap */
+                    width: 200px;
+                }
+             `}</style>
+             
+             <div className="vscode-minimap-toc-container">
+                 <div className="minimap-title" style={{
+                     fontSize: '0.8rem', 
+                     fontWeight: 'bold', 
+                     color: 'var(--vscode-fg-secondary)', 
+                     marginBottom: '10px'
+                 }}>OUTLINE</div>
+                 <ul className="minimap-list" style={{ listStyle: 'none', padding: 0, fontSize: '0.85rem' }}>
+                  {tocHeadings.map((heading, idx) => (
+                    <li key={idx} className={`minimap-item depth-${heading.depth}`} style={{ marginBottom: '4px', paddingLeft: heading.depth > 1 ? '10px' : '0' }}>
+                      <a href={`#${heading.id}`} style={{ textDecoration: 'none', color: 'var(--vscode-fg-secondary)', opacity: 0.8 }}>
+                        {heading.value}
+                      </a>
+                    </li>
+                  ))}
                 </ul>
-              </nav>
-              {/* 댓글 및 리액션 */}
-              <Giscus />
-            </footer>
-          </article>
-        </div>
-        {/* TOC는 흰 박스 바깥 노란 영역에 위치 */}
-        <aside className="sidebar-toc-fixed"
-          style={{
-            top: 0,
-            left: 'calc(50% + 400px)', // 800px/2 + offset
-            marginLeft: '24px',
-            width: '280px',
-            minHeight: '160px',
-            boxSizing: 'border-box',
-            background: 'transparent',
-            padding: '26px 18px 10px 10px',
-            zIndex: 2,
-          }}
-        >
-          <nav className="sidebar-toc">
-            <h4 className="toc-title">📌 Table of Contents</h4>
-            <ul className="toc-list">
-              {tocHeadings.map((heading, idx) => (
-                <li key={idx} className={`toc-item toc-depth-${heading.depth}`}>
-                  <a 
-                    href={`#${heading.id}`}
-                    className="toc-link"
-                  >
-                    {heading.value}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </aside>
+             </div>
+          </aside>
       </div>
     </Layout>
   )
@@ -129,6 +163,7 @@ export const pageQuery = graphql`
         title
         date(formatString: "MMMM DD, YYYY")
         description
+        category
       }
       headings {
         depth

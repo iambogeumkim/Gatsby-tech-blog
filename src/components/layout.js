@@ -1,97 +1,245 @@
 import * as React from "react"
 import { Link } from "gatsby"
-import ThemeToggle from "./theme/theme-toggle"
-import { defineCustomElements as deckDeckGoHighlightElement } from "@deckdeckgo/highlight-code/dist/loader";
+import { defineCustomElements as deckDeckGoHighlightElement } from "@deckdeckgo/highlight-code/dist/loader"
+import { VscClose, VscInfo, VscFileMedia } from "react-icons/vsc"
+import { SiPython } from "react-icons/si"
+import TitleBar from "./vscode/TitleBar"
+import ActivityBar from "./vscode/ActivityBar"
+import Sidebar from "./vscode/Sidebar"
+import StatusBar from "./vscode/StatusBar"
+import { useSidebar } from "../context/SidebarContext"
+import "../styles/vscode.css"
 
 deckDeckGoHighlightElement();
 
-const BlogHeaderTyping = () => {
-  // 타이핑 애니메이션 구현
-  const ref = React.useRef();
-  React.useEffect(() => {
-    const title = "Gold Vibes Only";
-    let i = 0;
-    const timer = setInterval(() => {
-      if (ref.current) {
-        ref.current.textContent = title.substring(0, i);
-        i++;
-        if (i > title.length) clearInterval(timer);
-      }
-    }, 110);
-    return () => clearInterval(timer);
-  }, []);
-  return (
-    <span className="search-header-title typing-animate">
-      <Link to="/" className="header-title-link">
-        <span ref={ref}></span>
-      </Link>
-    </span>
-  );
-};
-
-// 정적 헤더 (타이핑 효과 없음)
-const BlogHeaderStatic = () => {
-  return (
-    <span className="search-header-title">
-      <Link to="/" className="header-title-link">
-        Gold Vibes Only
-      </Link>
-    </span>
-  );
-};
-
-const Layout = ({ location, title, children }) => {
+const Layout = ({ location, title, children, currentFileName: propFileName, category }) => {
   const rootPath = `${__PATH_PREFIX__}/`
   const isRootPath = location.pathname === rootPath
-  const isAboutPage = location.pathname === "/about/" || location.pathname === "/about"
+  
+  // Context for Sidebar & Tabs
+  const { openTabs, addTab, closeTab } = useSidebar()
 
-  // About 페이지면 정적 헤더, 아니면 타이핑 애니메이션
-  const headerLogo = isAboutPage ? <BlogHeaderStatic /> : <BlogHeaderTyping />
+  // Sidebar State (Local UI state like width/visibility)
+  const [sidebarWidth, setSidebarWidth] = React.useState(250)
+  const [isSidebarVisible, setIsSidebarVisible] = React.useState(true)
+  const [activeSidebarView, setActiveSidebarView] = React.useState('explorer') // 'explorer' | 'search'
+  const isResizing = React.useRef(false)
+
+  React.useEffect(() => {
+    document.body.classList.add('vscode-theme');
+    return () => {
+      document.body.classList.remove('vscode-theme');
+    }
+  }, []);
+
+  // Define Icons first
+  const HashtagIcon = () => (
+    <span style={{ 
+      color: '#3b82f6', 
+      fontWeight: 'bold', 
+      fontSize: '15px', 
+      marginRight: '4px', // Reduced from 6px
+      display: 'inline-block',
+      lineHeight: '1'
+    }}>#</span>
+  )
+
+  const InfoIcon = () => (
+      <VscInfo style={{
+          color: '#3b82f6',
+          fontSize: '16px',
+          marginRight: '4px', // Reduced from 6px
+          display: 'inline-block',
+          verticalAlign: 'middle'
+      }} />
+  )
+
+  const ImageIcon = () => (
+      <VscFileMedia style={{
+          color: '#e37933', 
+          fontSize: '16px',
+          marginRight: '4px', // Reduced from 6px
+          display: 'inline-block',
+          verticalAlign: 'middle'
+      }} />
+  )
+
+  // --- Determine Current File Info ---
+  let displayFileName = "index.py";
+  let breadcrumbsPath = "";
+  let fileType = "md";
+
+  if (isRootPath) {
+      displayFileName = "README.md"; 
+      breadcrumbsPath = (
+          <div style={{display: 'flex', alignItems: 'center'}}>
+              <InfoIcon /> README.md
+          </div>
+      );
+  } else if (location.pathname.includes('about')) {
+      displayFileName = "about.py";
+      fileType = "py";
+      breadcrumbsPath = "src > pages > about.py";
+  } else {
+      // Blog Post or Preview
+      if (propFileName) {
+          displayFileName = propFileName;
+      } else {
+          const slug = location.pathname.replace(/\/$/, '').split('/').pop();
+          displayFileName = slug ? `${slug}.md` : "index.py";
+      }
+
+      const isPreview = location.pathname.startsWith('/preview');
+
+      // Construct breadcrumbs
+      if (isPreview) {
+          breadcrumbsPath = `static > timeline > ${displayFileName}`;
+      } else if (category) {
+          breadcrumbsPath = `src > content > blog > ${category} > ${displayFileName}`;
+      } else {
+          breadcrumbsPath = `src > content > blog > ${displayFileName}`;
+      }
+  }
+
+  // --- Check if Image File ---
+  // Fix: Do not treat /preview page as a direct image file in Layout. 
+  // PreviewPage handles the image rendering.
+  const isPreviewPage = location.pathname.startsWith('/preview');
+  const isImageFile = !isPreviewPage && (location.pathname.match(/\.(png|jpg|jpeg|gif|svg)$/i) || 
+                      (displayFileName && displayFileName.match(/\.(png|jpg|jpeg|gif|svg)$/i)));
+
+
+  // --- Sync Current Page to Open Tabs ---
+  React.useEffect(() => {
+      // Use pathname + search for unique tab identification (especially for preview page)
+      const currentPath = location.pathname + location.search; 
+      addTab({
+          path: currentPath,
+          title: displayFileName,
+          type: isImageFile || isPreviewPage ? 'img' : fileType 
+      })
+  }, [location.pathname, location.search, displayFileName, fileType, addTab, isImageFile, isPreviewPage]);
+
+
+  // Handle sidebar toggle
+  const toggleSidebar = () => {
+    setIsSidebarVisible(!isSidebarVisible);
+  }
+
+  // Handle resizing
+  const startResizing = React.useCallback((mouseDownEvent) => {
+    isResizing.current = true;
+    document.body.style.cursor = "col-resize";
+    document.body.style.userSelect = "none";
+
+    const handleMouseMove = (mouseMoveEvent) => {
+      if (isResizing.current) {
+        let newWidth = mouseMoveEvent.clientX - 48;
+        if (newWidth < 150) newWidth = 150;
+        if (newWidth > 600) newWidth = 600;
+        setSidebarWidth(newWidth);
+      }
+    };
+
+    const handleMouseUp = () => {
+      isResizing.current = false;
+      document.body.style.cursor = "default";
+      document.body.style.userSelect = "auto";
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+  }, []);
+
 
   return (
-    <div className="page-wrapper">
-      <div className="global-wrapper" data-is-root-path={isRootPath}>
-        <header className={`blog-header-as-search ${isAboutPage ? 'header-sticky' : ''}`}>
-          <div className="search-header-bar">
-            {/* 좌측: 타이틀 */}
-            {headerLogo}
+    <div className="vscode-layout-container">
+       <TitleBar />
+       <div className="vscode-layout">
+        <ActivityBar 
+            onToggleSidebar={toggleSidebar} 
+            isSidebarVisible={isSidebarVisible} 
+            activeView={activeSidebarView}
+            onActiveViewChange={setActiveSidebarView}
+        />
+        
+        {isSidebarVisible && (
+            <>
+                <Sidebar width={sidebarWidth} view={activeSidebarView} />
+                <div 
+                    className="vscode-resizer" 
+                    onMouseDown={startResizing}
+                ></div>
+            </>
+        )}
+        
+        <div className="vscode-editor-area">
+            {/* Dynamic Tabs Container */}
+            <div className="vscode-tabs-container">
+                {openTabs.map((tab) => {
+                    const currentPath = location.pathname + location.search;
+                    const isActive = currentPath === tab.path || 
+                                     (tab.path !== '/' && currentPath.startsWith(tab.path) && tab.path !== '/preview'); // Extra check to prevent /preview prefix match if exact match exists
+                    
+                    // Determine Icon
+                    let TabIcon = HashtagIcon;
+                    if (tab.title === 'README.md') TabIcon = InfoIcon;
+                    else if (tab.type === 'py') TabIcon = () => <SiPython className="icon-python" style={{marginRight: '4px'}} />;
+                    else if (tab.type === 'img' || (tab.title && tab.title.match(/\.(png|jpg|jpeg|gif|svg)$/i))) TabIcon = ImageIcon;
 
-            {/* 우측: About 페이지면 X 아이콘 (메인으로), 아니면 돋보기 (About으로) */}
-            {isAboutPage ? (
-              <Link to="/" className="search-icon-btn close-btn" aria-label="Close">
-                <svg viewBox="0 0 24 24" className="search-icon" aria-hidden="true">
-                  <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-                </svg>
-              </Link>
-            ) : (
-              <Link to="/about/" className="search-icon-btn" aria-label="About me">
-                <svg viewBox="0 0 24 24" className="search-icon" aria-hidden="true">
-                  <path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                </svg>
-              </Link>
-            )}
-          </div>
-        </header>
+                    return (
+                        <Link 
+                            to={tab.path} 
+                            key={tab.path}
+                            className={`vscode-tab ${isActive ? 'active' : ''}`}
+                            style={{textDecoration: 'none', gap: '4px'}} 
+                        >
+                            <TabIcon />
+                            
+                            {tab.title}
+                            
+                            {/* Close Button */}
+                            <span 
+                                className="tab-close-btn"
+                                onClick={(e) => closeTab(e, tab.path, location.pathname + location.search)}
+                                style={{marginLeft: 'auto', display: 'flex', alignItems: 'center'}}
+                            >
+                                <VscClose />
+                            </span>
+                        </Link>
+                    )
+                })}
+            </div>
+            
+            <div className="vscode-breadcrumbs">
+                {breadcrumbsPath}
+            </div>
 
-        <main className="global-main">{children}</main>
-      </div>
-
-      {/* About 페이지에서는 footer 숨김 - wrapper 밖에 배치 */}
-      {!isAboutPage && (
-        <footer className="blog-footer">
-          <div className="footer-main">
-            <span className="footer-title">Gold Vibes Only</span>
-          </div>
-          <div className="footer-links-row">
-            © 2025 Bogeum Kim All rights reserved.
-          </div>
-        </footer>
-      )}
-
-      {/* 우하단 고정 다크모드 토글 버튼 */}
-      <div className="fixed-theme-toggle">
-        <ThemeToggle />
-      </div>
+            <div className="vscode-editor-content">
+                {isImageFile ? (
+                    <div style={{
+                        display: 'flex', 
+                        justifyContent: 'center', 
+                        alignItems: 'center', 
+                        height: '100%', 
+                        backgroundColor: 'var(--vscode-bg)'
+                    }}>
+                        <img 
+                            src={location.pathname} 
+                            alt={displayFileName} 
+                            style={{maxWidth: '100%', maxHeight: '100%', objectFit: 'contain'}} 
+                        />
+                    </div>
+                ) : (
+                    children
+                )}
+            </div>
+        </div>
+        
+        </div>
+        <StatusBar />
     </div>
   )
 }
