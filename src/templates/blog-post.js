@@ -9,7 +9,6 @@ const BlogPostTemplate = ({
   location,
 }) => {
   const siteTitle = site.siteMetadata?.title || `Title`
-  const tocHeadings = post.headings.filter(heading => heading.depth <= 2)
 
   return (
     <Layout 
@@ -74,62 +73,6 @@ const BlogPostTemplate = ({
             </div>
 
           </div>
-
-          {/* Minimap Sidebar - Positioned absolute to the right of the content */}
-          <aside 
-            className="vscode-minimap-toc" 
-            style={{
-                position: 'fixed', // Use fixed to stay on screen
-                left: '50%', // Center base
-                marginLeft: '520px', // 1000px/2 + 20px padding
-                top: '100px',
-                width: '200px',
-                maxHeight: 'calc(100vh - 120px)',
-                overflowY: 'auto',
-                display: 'none', // Hidden by default on small screens
-                '@media (minWidth: 1500px)': { // This needs to be handled by CSS or logic
-                    display: 'block'
-                }
-            }}
-          >
-             {/* Note: Inline media queries don't work in React style prop. 
-                 We'll rely on the class 'vscode-minimap-toc' and add specific overrides if needed.
-                 Or better, just use the class and add a style block for positioning.
-             */}
-             <style>{`
-                @media (min-width: 1450px) {
-                    .vscode-minimap-toc-container {
-                        display: block !important;
-                    }
-                }
-                .vscode-minimap-toc-container {
-                    display: none;
-                    position: fixed;
-                    top: 100px;
-                    left: 50%;
-                    margin-left: 520px; /* Half of 1000px content + gap */
-                    width: 200px;
-                }
-             `}</style>
-             
-             <div className="vscode-minimap-toc-container">
-                 <div className="minimap-title" style={{
-                     fontSize: '0.8rem', 
-                     fontWeight: 'bold', 
-                     color: 'var(--vscode-fg-secondary)', 
-                     marginBottom: '10px'
-                 }}>OUTLINE</div>
-                 <ul className="minimap-list" style={{ listStyle: 'none', padding: 0, fontSize: '0.85rem' }}>
-                  {tocHeadings.map((heading, idx) => (
-                    <li key={idx} className={`minimap-item depth-${heading.depth}`} style={{ marginBottom: '4px', paddingLeft: heading.depth > 1 ? '10px' : '0' }}>
-                      <a href={`#${heading.id}`} style={{ textDecoration: 'none', color: 'var(--vscode-fg-secondary)', opacity: 0.8 }}>
-                        {heading.value}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-             </div>
-          </aside>
       </div>
     </Layout>
   )

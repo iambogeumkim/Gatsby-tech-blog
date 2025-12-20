@@ -189,7 +189,7 @@ const Layout = ({ location, title, children, currentFileName: propFileName, cate
                     else if (tab.type === 'py') TabIcon = () => <SiPython className="icon-python" style={{marginRight: '4px'}} />;
                     else if (tab.type === 'img' || (tab.title && tab.title.match(/\.(png|jpg|jpeg|gif|svg)$/i))) TabIcon = ImageIcon;
 
-                    return (
+                        return (
                         <Link 
                             to={tab.path} 
                             key={tab.path}
@@ -198,13 +198,15 @@ const Layout = ({ location, title, children, currentFileName: propFileName, cate
                         >
                             <TabIcon />
                             
-                            {tab.title}
+                            <span className="vscode-tab-title" title={tab.title}>
+                                {tab.title}
+                            </span>
                             
                             {/* Close Button */}
                             <span 
                                 className="tab-close-btn"
                                 onClick={(e) => closeTab(e, tab.path, location.pathname + location.search)}
-                                style={{marginLeft: 'auto', display: 'flex', alignItems: 'center'}}
+                                style={{marginLeft: 'auto', display: 'flex', alignItems: 'center', flexShrink: 0}}
                             >
                                 <VscClose />
                             </span>

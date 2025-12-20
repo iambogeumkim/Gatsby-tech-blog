@@ -85,7 +85,7 @@ const ActivityBar = ({ onToggleSidebar, isSidebarVisible, activeView, onActiveVi
       >
          <VscSearch size={24} />
       </div>
-      <div className="vscode-activity-icon" title="Source Control">
+      <div className="vscode-activity-icon" title="Source Control" style={{ cursor: 'default' }}>
         <VscSourceControl size={24} />
       </div>
       
