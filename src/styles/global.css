@@ -1374,11 +1374,15 @@ figcaption {
 }
 
 /* 인라인 코드 스타일 */
-.post-content code {
-  font-family: inherit;
+.post-content code,
+.blog-post code,
+code {
+  font-family: inherit !important;
   color: #eb5757;
 }
 
-body.dark-mode .post-content code {
+body.dark-mode .post-content code,
+body.dark-mode .blog-post code,
+body.dark-mode code {
   color: #ff7b72;
 }
