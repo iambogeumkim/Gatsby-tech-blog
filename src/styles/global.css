@@ -1372,3 +1372,13 @@ figcaption {
   margin-top: 0.6rem;
   margin-bottom: 1rem;
 }
+
+/* 인라인 코드 스타일 */
+.post-content code {
+  font-family: inherit;
+  color: #eb5757;
+}
+
+body.dark-mode .post-content code {
+  color: #ff7b72;
+}
