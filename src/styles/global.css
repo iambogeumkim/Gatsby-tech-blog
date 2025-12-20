@@ -1349,3 +1349,26 @@ body.dark-mode .header-title-link {
 .giscus-wrapper .giscus {
   max-width: 100%;
 }
+
+figure {
+  text-align: center;
+}
+
+figcaption {
+  font-size: 0.8em;
+  color: #666;
+  margin-top: 0.5em;
+}
+
+/* 포스트 본문 h1, h2 스타일 */
+.post-content h1 {
+  font-size: 1.8rem;
+  margin-top: 2.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.post-content h2 {
+  font-size: 1.4rem;
+  margin-top: 0.6rem;
+  margin-bottom: 1rem;
+}
