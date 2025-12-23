@@ -1,7 +1,7 @@
 ---
-title: 221130 TIL: Transformer와 그래디언트 안정화
-date: 2022-11-30
-description: 1 day 1 lesson
+title: "221130 TIL: Transformer와 그래디언트 안정화"
+date: "2022-11-30"
+description: "1 day 1 lesson"
 category: "TIL"
 ---
 

@@ -1,7 +1,7 @@
 ---
-title: 221123 TIL: PyTorch CrossEntropyLoss와 PLM Logits 사용
-date: 2022-11-23
-description: 1 day 1 lesson
+title: "221123 TIL: PyTorch CrossEntropyLoss와 PLM Logits 사용"
+date: "2022-11-23T12:00:00.000+09:00"
+description: "1 day 1 lesson"
 category: "TIL"
 ---
 

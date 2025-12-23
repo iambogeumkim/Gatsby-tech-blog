@@ -1,7 +1,7 @@
 ---
-title: 221209 TIL: UTF-8과 UTF-8-SIG 차이
-date: 2022-12-09
-description: 1 day 1 lesson
+title: "221209 TIL: UTF-8과 UTF-8-SIG 차이"
+date: "2022-12-09T12:00:00.000+09:00"
+description: "1 day 1 lesson"
 category: "TIL"
 ---
 

@@ -1,7 +1,7 @@
 ---
-title: 221128 TIL: PyTorch Warmup과 Pandas 효율성
-date: 2022-11-28
-description: 1 day 1 lesson
+title: "221128 TIL: PyTorch Warmup과 Pandas 효율성"
+date: "2022-11-28T12:00:00.000+09:00"
+description: "1 day 1 lesson"
 category: "TIL"
 ---
 

@@ -1,7 +1,7 @@
 ---
-title: 221201 TIL: 앙상블 학습 기법
-date: 2022-12-01
-description: 1 day 1 lesson
+title: "221201 TIL: 앙상블 학습 기법"
+date: "2022-12-01T12:00:00.000+09:00"
+description: "1 day 1 lesson"
 category: "TIL"
 ---
 

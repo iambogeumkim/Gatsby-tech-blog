@@ -1,7 +1,7 @@
 ---
-title: 221118 TIL: PLM과 Tensor 사용 시 주의사항
-date: 2022-11-18
-description: 1 day 1 lesson
+title: "221118 TIL: PLM과 Tensor 사용 시 주의사항"
+date: "2022-11-18T12:00:00.000+09:00"
+description: "1 day 1 lesson"
 category: "TIL"
 ---
 

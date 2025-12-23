@@ -1,7 +1,7 @@
 ---
-title: 221124 TIL: PLM 입력의 구성 요소
-date: 2022-11-24
-description: 1 day 1 lesson
+title: "221124 TIL: PLM 입력의 구성 요소"
+date: "2022-11-24T12:00:00.000+09:00"
+description: "1 day 1 lesson"
 category: "TIL"
 ---
 

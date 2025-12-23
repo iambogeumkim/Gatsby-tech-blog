@@ -1,7 +1,7 @@
 ---
-title: 221205 TIL: Pandas 데이터셋 분할 (train/valid)
-date: 2022-12-05
-description: 1 day 1 lesson
+title: "221205 TIL: Pandas 데이터셋 분할 (train/valid)"
+date: "2022-12-05T12:00:00.000+09:00"
+description: "1 day 1 lesson"
 category: "TIL"
 ---
 

@@ -1,7 +1,7 @@
 ---
-title: 221222 TIL: Stable Diffusion 개요 및 구성 요소
-date: 2022-12-22
-description: 1 day 1 lesson
+title: "221222 TIL: Stable Diffusion 개요 및 구성 요소"
+date: "2022-12-22T12:00:00.000+09:00"
+description: "1 day 1 lesson"
 category: "TIL"
 ---
 

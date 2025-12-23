@@ -1,7 +1,7 @@
 ---
-title: 221117 TIL: PyTorch와 Encoder/Decoder
-date: 2022-11-17
-description: 1 day 1 lesson
+title: "221117 TIL: PyTorch, Encoder/Decoder"
+date: "2022-11-17"
+description: "1 day 1 lesson"
 category: "TIL"
 ---
 

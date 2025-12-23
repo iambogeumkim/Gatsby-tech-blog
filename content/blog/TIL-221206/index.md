@@ -1,7 +1,7 @@
 ---
-title: 221206 TIL: Pandas sample 후 reset_index() 필요성
-date: 2022-12-06
-description: 1 day 1 lesson
+title: "221206 TIL: Pandas sample 후 reset_index() 필요성"
+date: "2022-12-06T12:00:00.000+09:00"
+description: "1 day 1 lesson"
 category: "TIL"
 ---
 
